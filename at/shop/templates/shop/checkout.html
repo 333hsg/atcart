@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+
+<style media="screen">
+*{
+  font-family: 'Roboto', sans-serif;
+}
+</style>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .check-form {
+      margin: 4rem 0 0 0;
+      background-color: whitesmoke;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    .form-m {
+      margin: 4rem 0.5rem 0.5rem 0.5rem;
+    }
+
+    .required {
+      color: red;
+    }
+
+    .po-margin {
+      margin-top: 0.5rem;
+      width: 50%;
+      max-width: 15rem;
+    }
+
+    .edit-btn {
+      width: 5rem;
+      margin-left: 10rem;
+    }
+
+    .p-section {
+      margin: 1rem 0.5rem 0.5rem 0.5rem;
+      padding: 0.5rem;
+      background-color: whitesmoke;
+      border-radius: 0.5rem;
+
+    }
+  </style>
+
+  <title>ASHAPURA TRADERS | Checkout</title>
+
+</head>
+
+<body>
+
+  <div class="fixed-top">
+    <nav class="navbar navbar-dark bg-dark container-fluid px-xl-5">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="\shop\">
+          ASHAPURA TRADERS
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="form-m">
+    <div class=" check-form">
+      <h3>Delivery details</h3>
+      <form name="detailsss" method="post">{% csrf_token %}
+        <input type="hidden" name="items_json" id="items_json">
+        <input type="hidden" name="total-amt" id="total-amt">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputname" >Name <span class="required">*</span> </label>
+            <input required type="text" class="form-control" id="name" name="name" placeholder="Name">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip" required>Phone Number <span class="required">*</span> </label>
+            <input required type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress" required>Address line 1 <span class="required">*</span></label>
+          <input required type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2" required>Address line 2 <span class="required">*</span></label>
+          <input type="text" class="form-control" id="address2" name="address2"
+            placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="inputZip" required>Pincode <span class="required">*</span></label>
+            <input required type="text" class="form-control" id="zip_code" name="zip_code" oninput="checkzip();"
+              placeholder="Pincode">
+          </div>
+        </div>
+        <!--<div class="form-group col-md-6">
+          <label for="inputEmail4">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>-->
+
+        <!--<div class="d-grid gap-2 d-flex justify-content-end">
+          <button class="btn btn-dark po-margin">Submit</button>
+        </div>-->
+
+    </div>
+  </div>
+
+  <div class="form-m" style="display: none;">
+    <div class=" check-form">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h3>Delivary details</h3>
+        </div>
+        <div>
+          <button class="btn btn-dark">Edit</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-form">
+      <div class="d-flex justify-content-between">
+        <h3>Payment Details <span class="required">*</h3>
+        <h6>₹<span id="amt"></span></h6>
+      </div>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Pay On Delivery</option>
+      </select>
+    </div>
+    <div class="d-grid gap-2 d-flex justify-content-end">
+      <button class="btn btn-dark po-margin" type="submit" style="display: none;">Edit</button>
+      <a href="C:\Users\user\Desktop\atboot\frontend\order-placed.html" class="po-margin">
+        <button class="btn btn-dark orderrr" type="submit" style="width: 100%;">Place Order</button>
+      </a>
+
+    </div>
+  </div>
+  </form>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  var total = parseInt(localStorage.getItem("total"))
+    document.getElementById("amt").innerHTML = total
+    function checkzip() {
+      var zip = document.querySelector('#zip_code');
+      if (zip.value != "400005") {
+        zip.setCustomValidity('Only delivering in Colaba, 400005');
+      }
+      else {
+        document.getElementById('zip_code').setCustomValidity('');
+      }
+    }
+    var a = localStorage.getItem('cart')
+    var x = a;
+    document.getElementById("items_json").value = x;
+    document.getElementById("total-amt").value = "₹"+String(total)
+    if (localStorage.getItem('details')==null){
+      var details = {
+      }
+      }
+      else {
+      details = JSON.parse(localStorage.getItem('details'));
+      detailsss.name.value=details["name"]
+      detailsss.phone.value=details["phone"]
+      detailsss.address1.value=details["address1"]
+      detailsss.address2.value=details["address2"]
+      detailsss.zip_code.value=details["zip_code"]
+      }
+      $('.orderrr').click(function() {
+        details = {
+          name:detailsss.name.value,
+          phone:detailsss.phone.value,
+          address1:detailsss.address1.value,
+          address2:detailsss.address2.value,
+          zip_code:detailsss.zip_code.value,
+        }
+        localStorage.setItem('details',JSON.stringify(details))
+      })
+
+    {% if thank %}
+    var oid = {{id}}
+    localStorage.removeItem('cart')
+    localStorage.setItem('oid',oid)
+    var b = "/order-placed/invoice/" + oid
+
+    document.location = "/order-placed";
+    {% endif %}
+  </script>
+</body>

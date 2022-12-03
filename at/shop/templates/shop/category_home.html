@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS -->
+    <style>
+      * {
+        font-family: "Roboto", sans-serif;
+      }
+      .cart-icon {
+        height: 20px;
+        width: 20px;
+        margin-bottom: 0.25rem;
+      }
+
+      .cart-link {
+        text-decoration: none;
+        color: white;
+        font-size: 12px;
+      }
+
+      .cart-num {
+        margin-left: 0.1rem;
+      }
+
+      .nav-ser {
+        background-color: white;
+      }
+
+      #opensidebar {
+        display: none;
+      }
+      #sidebarmenu {
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin-top: 55px;
+        background: rgb(241, 240, 240);
+        transform: translateX(-100%);
+        transition: transform 250ms ease-in-out;
+      }
+
+      #opensidebar:checked ~ #sidebarmenu {
+        transform: translateX(0px);
+      }
+
+      .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .menu li {
+        color: black;
+        border: 1px solid rgb(206, 206, 206);
+      }
+      .menu li a {
+        color: black;
+        display: block;
+        text-decoration: none;
+        padding: 20px;
+      }
+      .menu li div {
+        color: black;
+        display: block;
+        text-decoration: none;
+        padding: 20px;
+      }
+      .sidebaricontoggle {
+        width: 22px;
+        height: 22px;
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        cursor: pointer;
+      }
+      .spinner {
+        height: 3px;
+        background: white;
+        transition: all 0.3s;
+      }
+      .spinner.middle,
+      .spinner.bottom {
+        margin-top: 3px;
+      }
+
+      #opensidebar:checked ~ .sidebaricontoggle > .spinner.middle {
+        opacity: 0;
+      }
+
+      #opensidebar:checked ~ .sidebaricontoggle > .spinner.top {
+        transform: rotate(135deg);
+        margin-top: 7px;
+      }
+
+      #opensidebar:checked ~ .sidebaricontoggle > .spinner.bottom {
+        transform: rotate(-135deg);
+        margin-top: -10px;
+      }
+
+      #opensidebar:checked ~ #search-text {
+        margin-left: 99999px;
+      }
+      .navbar-brand {
+        margin-left: 35px;
+      }
+      .navbar {
+        padding: 8px 0;
+      }
+      .category-start {
+        margin-top: 108px;
+      }
+      .home-card {
+        max-width: 600px;
+        margin: 0;
+        background-color: white;
+        border-radius: 0.5rem;
+      }
+      .card {
+        margin-top: 88px;
+      }
+
+      /* categoris */
+
+      .categories {
+        background-color: whitesmoke;
+        width: 100%;
+      }
+
+      .category-title{
+        margin-top: 8rem;
+      }
+
+      .categories .wrapper {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+        flex-direction: column;
+        padding: 2px 0;
+      }
+
+      .categories .wrapper .categories-container {
+        display: flex;
+        gap: 35px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .categories .wrapper .categories-container .category {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10%;
+        transition: 0.5s ease-out;
+      }
+
+      .categories .wrapper .categories-container .category::before {
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.281);
+        position: absolute;
+        z-index: 1;
+      }
+
+      .categories .wrapper .categories-container .category:hover {
+        cursor: pointer;
+      }
+
+      .categories .wrapper .categories-container .category:hover img {
+        transform: scale(1.2);
+        transition: 0.5s ease-in;
+      }
+
+      .categories .wrapper .categories-container .category .img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        position: relative;
+      }
+
+      .categories .wrapper .categories-container .category-body {
+        position: absolute;
+        text-align: center;
+        color: white;
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .categories .wrapper .categories-container .category-body h4 {
+        font-size: 22px;
+      }
+
+      .categories .wrapper .categories-container .category-body span {
+        font-size: 1rem;
+      }
+      
+    </style>
+
+    <title>Document</title>
+  </head>
+  <body>
+    {% csrf_token %}
+    <div class="fixed-top">
+      <nav class="navbar navbar-dark bg-dark container-fluid">
+        <div class="container-fluid">
+          <input type="checkbox" id="opensidebar" />
+          <label for="opensidebar" class="sidebaricontoggle">
+            <div class="spinner top"></div>
+            <div class="spinner middle"></div>
+            <div class="spinner bottom"></div>
+          </label>
+          <div id="sidebarmenu">
+            <ul class="menu">
+              <li style="margin-top: 60px; align-content: center7+86022222222
+              ;"><a href="\shop\">Home</a></li>
+              <li><div style="width: 150px">
+                <form name="frm" method="post">
+                  {% csrf_token %}
+                  <select
+            name="cate"
+            class="form-select form-select-sm bg-light category"
+            onchange="location = this.value";
+            aria-label=".form-select-sm example"
+          >
+            <option selected value="">Categories</option>
+            {% for i in categories %}
+            <a href="categories/i"><option value="\categories\{{i}}">{{i}}</option></a>
+            {% endfor %}
+          </select>
+                </form>
+              </div>
+            </li>
+            <li>
+              <a href="">Help</a>
+            </li>            
+            </ul>
+          </div>
+          <a class="navbar-brand" href="\shop\"> ASHAPURA TRADERS </a>
+          <a href="\shop\cart\" class="cart-link whole-cart">
+            <div class="d-flex">
+              <img
+                class="cart-icon"
+                src="/media/shop/images/cart.png"
+                alt="cart"
+              /><span class="cart-num" id="carttt">0</span>
+            </div>
+          </a>
+        </div>
+      </nav>
+
+      <div class="search-bar-product nav-ser">
+        <nav class="navbar navbar-dark">
+          <div
+            class="container-fluid d-flex justify-content-center"
+            style="max-width: 600px"
+          >
+            <form
+              method="get"
+              action="/shop/search/"
+              class="d-flex"
+              style="width: 100%"
+            >
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                name="search"
+                aria-label="Search"
+                id="search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </div>
+    
+      <!--Categories start-->
+      <div class="categories">
+        <div class="wrapper">
+          <h3 class="category-title">CATEGORIES</h3>
+
+          <div class="categories-container">
+
+            <!--Loop starts here-->
+            {% for i in categories %}
+
+            <div class="category">
+              <a href="\categories\{{i}}">
+                <!-- Category image-->
+                <img src="/media/shop/images/{{i}}.jpg" alt="{{i}}" />
+              <div class="category-body">
+                <h4><!-- Category name-->{{i}}</h4>
+              </div>
+              </a>
+            </div>
+            {% endfor %}
+            <!--Loop ends here-->
+
+          </div>
+        </div>
+      </div>
+    
+
+    <footer>
+      <div class="bg-dark" style="margin: 0">
+        <h5
+          class="text-center"
+          style="margin: 0.5rem 0 0 0; padding: 0.5rem 0 0.5rem 0; color: white"
+        >
+          <i class="fa fa-phone"></i> / <i class="fa fa-whatsapp"></i> + 91
+          8169112377
+        </h5>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      if (localStorage.getItem("cart") == null) {
+        var cart = {};
+      } else {
+        cart = JSON.parse(localStorage.getItem("cart"));
+      }
+      document.getElementById("carttt").innerHTML = Object.keys(cart).length;
+      function dos($i) {
+        var a = $i;
+        console.log("here");
+        frm.submit();
+      }
+    </script>
+  </body>
+</html>

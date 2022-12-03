@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Invoice</title>
+
+    <style>
+    	*{
+    		margin:0em;
+    		padding:0em;
+    	}
+    	.company_name {
+    		margin:0em;
+        font-size: 3em;
+        text-align: center;
+      }
+      .address {
+        font-size:1.5em;
+        text-align: center;
+        margin: 0em;
+      }
+      .contact {
+        font-size:1.5em;
+        text-align: center;
+        margin: 0em;
+      }
+      .invoice {
+        font-size:1.6em;
+        text-align: center;
+        margin: 0.2em;
+      }
+      .default_font_size {
+        font-size: 1.3em;
+        white-space: pre;
+      }
+      .billto {
+      }
+      .invoice_t {
+
+      }
+    </style>
+  </head>
+  <body>
+    <p class="company_name center">Ashapura Traders</p>
+    <p class="address center">
+      Shop No. 2, Miya Chawl, Near Vishakha Vandana, Colaba Dandi, Mumbai-400005
+    </p>
+    <p class="contact center">Contact Number : +91 8169112377</p>
+    <p class="invoice center">INVOICE</p>
+
+    <div class="default_font_size">
+      <p class="billto" style="white-space: pre;">Bill To: {{name}}                                                                                                                                                   Invoice: F{{oid}}</p>
+
+      <hr>
+      	<p>Sr.      Item Name                                                                                                               Quantity    Price    Amount    </p>
+
+      <hr>
+	{% for j in arr%}
+	<p>{{j.sr}}{{j.s1}}{{j.prod}}{{j.s2}}{{j.pcs}}{{j.s3}}{{j.price}}{{j.s4}}{{j.total}}</p>
+      
+      <!-- Loop ends here -->
+      {% endfor %}
+
+      <hr>
+
+      <p style="font-size:1.5em;">                                                                                               Total: {{total}}</p>
+    </div>
+  </body>
+</html>

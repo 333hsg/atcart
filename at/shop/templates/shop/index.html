@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>Home | Ashapura Traders</title>
+</head>
+
+<body style="background-color: rgb(241, 241, 241); ">
+  <div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+      <div class="container-fluid">
+        <a class="navbar-brand mx-auto" href="home.html">ASHAPURA TRADERS</a>
+      </div>
+    </nav>
+
+
+    <div style="margin: 0.5rem;">
+      <form method="get" action="/shop/search/" class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" style="max-width: 100%;">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+    </div>
+    {% for i in product %}
+  </div>
+
+  <div id="container1" style="padding: 0.5rem;">
+    <a href="/shop/products/{{i.id}}" style="text-decoration: none;">
+      <div id="card" class="card mx-auto" style="max-width: 40rem; border-radius: 0.5rem; margin-top: 0.5rem;">
+        <div class="row">
+          <div class="col-3">
+            <img class="img-fluid" src="/media/{{i.product_image}}" alt="product image" style="margin: 0.5rem; border-radius: 0.5rem;">
+          </div>
+          <div class="col-9" style="padding-left: 0; max-height: 5rem;">
+            <div class="card-body" style=" font-size:5vw; max-height: 1rem; padding: 0.3rem 0.3rem; color: rgb(0, 0, 0);">
+              <h7 class="card-title" id="namepr{{i.id}} style=" font-family: Arial, sans-serif; font-weight: bolder;">{{i.product_name}}</h7><br>
+              <h7>
+                <h5 style="display: inline-flex; font-size:5vw;"><span class="card-text badge bg-success" style="font-weight: 900">{{i.product_price}}₹</span></h5> <span style="text-decoration: line-through;">₹720</span></p>
+              </h7>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  {% endfor %}
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <script>
+      if (localStorage.getItem('cart') == null) {
+        var cart = {};
+      } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+      }
+      $('.cart').click(function() {
+        var idstr = this.id.toString();
+        if (cart[idstr] != undefined) {
+          qty = cart[idstr][0] + 1
+        } else {
+          qty = 1;
+          name = document.getElementById('name' + idstr).innerHTML;
+          cart[idstr] = [qty, name]
+        }
+        console.log(cart[idstr]);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+      });
+    </script>
+
+</body>
+
+</html>
