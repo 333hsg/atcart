@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'm*9*kp+g)ilmtl+@y=g8p4ge-=lct*)q2a(4=_(n66a!1vi#02'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'ashapura-traders.herokuapp.com',
+    'athsg.pythonanywhere.com',
     '127.0.0.1',
 ]
 
@@ -82,8 +82,11 @@ WSGI_APPLICATION = 'at.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'athsg$default',
+        'USER': 'athsg',
+        'PASSWORD': '1705$Hhh',
+        'HOST': 'athsg.mysql.pythonanywhere-services.com'
     }
 }
 
@@ -125,6 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = '/home/athsg/atcart/at/static'
 
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)

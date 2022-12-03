@@ -186,12 +186,14 @@ def checkout(request):
 
 
 def ordersforadmin(request):
-    ord = Orders.objects.all()
+    ord = Orders.objects.order_by('order_id').all().reverse()
+
     l = []
     for k in ord:
-        l.append(k.name)
-        l.append(k.address)
-        l.append(k.total)
+        l.append("Order No: "+str(k.order_id))
+        l.append("Name: "+str(k.name))
+        l.append("Address: "+str(k.address))
+        l.append("Total: "+str(k.total))
         a = k.items_json
         kk = []
         while(len(a) > 0):
@@ -199,7 +201,6 @@ def ordersforadmin(request):
             l.append(a[:b])
             a = a[b + 1:]
         l.append(" ")
-    print(l)
     authorised = False
     if request.method == "POST":
         uname = request.POST.get('username', '')
